@@ -1,0 +1,17 @@
+$Id: README.bugs,v 1.6 1997/12/11 14:02:11 rlpowell Exp $
+
+Here are list of the known bugs and weak areas of The Goggle.
+
+- I'm fairly certain I introduced bugs in the window handling.  Lemme know
+  if you catch any
+
+
+From tommy.lindqvist@space.se:
+
+- I sometimes gets corruption in my save-files. This causes
+   a core dump to erupt when I try to read in a new turn file. I have
+   only a bad workaround for this, in that it works if you erase all
+   your save-files.
+
+- If you have a fleet with speed 0, you also get a core dump.
+    (I can't repeat this.  Anyone know of where goggle deals with fleets?)

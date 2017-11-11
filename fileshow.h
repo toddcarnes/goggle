@@ -1,0 +1,13 @@
+int FileInit (void);
+int FileDelete (void);
+int FileToFile (int i_which);
+int FileNextFile (int i_dir);
+int FileResetFilename (char *cp_filename, char *cp_title, int i_id, char *cp_search);
+int FileChkRedisplay (char *cp_file);
+int FileRedisplay (void);
+int FilePlaceCursor (void);
+int FileCursorMove (int i_ymod, int i_xmod);
+int FileJumpWorld (int i_ymod, int i_xmod);
+int FileCursorJump (int i_ymod, int i_xmod);
+int FileRetrieveCommentAtCursor (char *cp_comment);
+int FileDisplay( void );

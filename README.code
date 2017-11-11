@@ -1,0 +1,21 @@
+$Id: README.code,v 1.8 1997/12/14 15:13:23 rlpowell Exp $
+
+Contributors:
+
+Douglas Selph                 Original Author
+Robin Powell                  Current Maintainer
+Laurent Desnogues <desnogue@aiguemarine.unice.fr>  ANSI Fix
+Anders <frv95alk@mds.mdh.se>  Ship 'safe' number, minor fixes
+Vincent Archer <Vincent.Archer@hsc.fr>	Fix to remove ungetch
+
+
+Things I plan to do next:
+
+- Add a way to see messages other players send to you!
+
+Long-term wish list:
+
+- Set things up so that you can interactively produce orders in goggle,for
+  example a 'send group' command that would allow you to scroll through your
+  groups and send some number to a planet (defaulting to 'all' and 'planet 
+  under cursor' respectively).

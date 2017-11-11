@@ -1,0 +1,59 @@
+  
+	******************
+	*** INSTALLING ***
+	******************
+
+	(1) Go to the directory where you placed your goggle files.
+For example, "~/galaxy/goggle".
+	(2) Edit the file 'platform.h' and do what it tells you to do.
+	(3) Run 'make'.
+	(4) Place the executable 'goggle' in some directory somewhere 
+that is in your PATH variable.  For example, if "~/bin" is in your PATH
+environment variable then copy the executable there.
+
+	****************************
+	*** SETUP FOR A NEW GAME ***
+	****************************
+
+	The following sequence of steps should be followed each time you are
+setting up for a new Galaxy Game you have just had the joy of becoming involved
+with.
+	(1) Create a directory somewhere just for that game.  For example, 
+if you are involved with galaxy game 'Lycaeum', you might call it 
+"~/galaxy/Lycaeum".   
+	(2) Place all turn reports in this directory.  
+	(3) Start up the goggle.
+	(4) The first command you should execute is Options->Customize.  
+(You need to do this once, but once done, you don't need to do it again).
+Type 'oc' when you get into the goggle to bring up the dialog.  After 'Ok'
+is selected, it should create 'save.version' file with the following three
+lines (for example):
+
+	version = 3.0
+	map_width = 110
+	racename = Unset
+	columns = 0
+
+	This specifies the galaxy game version you running followed by the
+width of the galaxy.  Also, it writes what it thinks your race name is.
+It can derive this from the turn report, so you do not have to worry about
+this field.  It records it here because the save.groups, save.ships, and 
+save.planets files do not have this information except implicitly.  If you
+don't know what the columns thing is referring to, type 'ot' a few times.
+The value in the version file is the startup value.
+
+	*****************************
+	*** READING IN YOUR TURNS ***
+	*****************************
+
+	If you want to get started right away, the next command to run is the 
+'File->Read Turn' command (accelerator 'ft').  You should enter in your latest
+turn report.  The 'TRUE' for 'Save After Read' means the next time you start 
+up the goggle, it will remember all the data you read in.
+
+	At some point you will want to read the README.usage file.  This is the
+file which is displayed automatically upon startup.   
+
+        To just start playing around use the 'TAB' and movement keys to 
+activate and move around in the menu bar.  Use <return> to activate an item.
+

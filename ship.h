@@ -1,0 +1,15 @@
+int init_ships (void);
+int save_ships (void);
+void write_all_races_ships (FILE *fp);
+void write_all_ships (FILE *fp, int race, int tech);
+int show_test_ship (int i);
+int get_ship_id (char *cp_name, int race);
+int get_ship_data (int i_id, float *fp_drive, int *ip_attacks, float *fp_weapon, float *fp_shield, float *fp_cargo);
+int new_ship_data (char *cp_name, float drive, int attacks, float weapon, float shield, float cargo, int race);
+int set_ship_data (int id, float drive, int attacks, float weapon, float shield, float cargo, int race);
+int calc_ship_data (int id, float tdrive, float tweapon, float tshield, float tcargo, float quan);
+int write_ship_brief_data (FILE *fp, int id, int i_field);
+float get_ship_mass(int id);
+void sort_ships (void);
+int ship_cankill (int i_attack_id, int i_target_id, float f_attack_tweapon, float f_target_tshield, float f_target_tcargo, float f_target_quantity);
+int ship_kill (int i_attack_id, int i_target_id, float f_attack_tweapon, float f_target_tshield, float f_target_tcargo, float f_target_quantity);

@@ -1,0 +1,191 @@
+
+    Device: The Goggle.
+    Creator: Douglas Selph
+    Current Maintainer: Robin Powell
+    E-Mail: rlpowell@calum.csclub.uwaterloo.ca
+
+Purpose: 
+
+   The Goggle was designed for use within the Galaxy Game 
+by Russell Wallace to read in turn reports, maintain an 
+easily accessible visual 'map' of the galaxy, an
+internal database of the cosmos and to respond to requests 
+to make certain game functions easier.
+
+Requirements:
+
+   Ansi C-compiler (the Makefile uses gcc).
+   Curses (/usr/lib/libcurses.a /usr/lib/libtermcap.a) 
+
+Features:
+
+   - Able to directly read in turn reports into it's database, providing
+     services for:
+
+	A map showing the position of planets and their names.
+	Ability to retrieve information on a desired planet.
+	The contents and position of groups.
+	The stats of ships for races.
+
+   In regards to Planets:
+
+     - Shows any portion of the cosmos similar to the
+       "map" command in conjuction with the turn reports.
+       The limitation is that the database only knows about
+       what it has read from the turn reports.
+
+       Able to zoom in on any area of the map, or, able to
+       zoom in around a planet of interest.
+
+       Able to show either resource value, planet size, or the
+       id of the planet next to the planet symbol on the map.
+
+     - Can display the distance between two planets in light
+       years.
+    
+     - Can display a list of the planets, listing the size
+       and resource values for uninhabitied plantes, and
+       full planet descriptions for your planets. 
+
+     - Can display the closest planets to a particular planet.
+
+     - Able to estimate the production capicity for the following
+       items for a planet: number of ships of a particular mass,
+       cap, materials, drive tech, weapon tech, shield tech,
+       and cargo tech.
+
+   In regards to Ships:
+
+     - Able to read ship decriptions from the turn report.
+       Maintains pertainent tech levels for each race of
+       ships.  Gathers from the turn report your current
+       tech level.
+
+     - Able to display the ships with the following ship
+       attributes calculated for you: mass, #light years
+       before and after cargo, defense before and after
+       cargo, attack power, effective cargo, and cost to
+       upgrade a single ship.
+
+     - A function that allows you to enter: the # of light 
+       years you wish a ship to move, and the mass of the
+       ship to compute: the necessary drive power needed to 
+       move the ship with that mass at that speed. 
+       Use this value to determine the drive of the ship needed.
+
+     - A function that allows you to enter: the desired
+       defense power wanted, and the mass of the ship to
+       compute: the necessary shield strength needed to
+       give a ship of that mass the desired defense power.
+ 
+     - A function that allows you to design a test ship.
+
+   Adding your own Testing Race to the ship decriptions :
+
+      To add your own testing race to enter in ship descriptions that 
+      you haven't actually made yet, but would like to see what it looks 
+      like if it were made, do the following: after you have done at
+      least one save to create 'save.ships':
+
+	 In 'save.ships' copy any section starting from the line 
+	 "<Race> Ship Types" and ending with at least one of the ships 
+	 listed in the Ship Types list.  Copy this section and 
+	 place it at the very top but call it 'Test Ship Types'.  
+	 Delete or add any ships to the list as desired.  You may 
+	 also add any set of tech levels to the tech level list.  You 
+	 will see it when you start back up.
+
+   In regards to Groups:
+
+    - Can read in the "Group" sections from the turn report.
+      Can then print out the groups sorted by planet and race 
+      for quick assement of what ships are at what planet.
+
+    - Can read in alien groups as well from the turn report.
+      Able to print out the groups for a particular race.
+
+    - Able to read in battle reports from the turn report.
+      If 'Dist from planet' field of the group says 'Battle'
+      then you know of that group only because it participated
+      in a battle.  The '# of ships' field will show how many
+      ships were left in the group after the battle ended.
+
+    A Battle Simulator:
+
+    - Can set up a mock battle over a mock planet.  Use the
+      Battle Use command to either mark all the groups at
+      a planet to be in the battle; or; Individual groups
+      at a planet may be marked for use in a battle.
+
+      When all proper groups are in the battle, just execute
+      the Battle->Run command.   An argument let's you to 
+      run the same battle more than once, so you can see what
+      would happen over N trys thus producing an average result.
+
+      Further, you may save your results to a file, then edit
+      the file further to get the groups in the battle just 
+      right.  There is a side-executable called 'battle' which
+      can be used as a simple interface into just the battle
+      simulator part.
+     
+To Use:
+
+    ( Step 1. )
+
+    Enter with 'goggle'.
+
+    If you are first starting up, don't worry about all the
+    "No such file or directory" messages.
+
+    ( Step 2. )
+
+    Execute the 'Options->Customize' command.
+
+    Set the galaxy version you are playing.  Distinguishes
+    only between 2.0 (less than 3.0) and 3.0+ as of this writing.
+    Set the map width as well.
+
+    ( Step 3. )
+
+    The 'ft' command (File->Read Turn Report) can be used to 
+    read in turn reports.  Go ahead and use this command to 
+    read in the last turn report you have received.  
+
+    ( Step 4. )
+
+    You can now see the planets in the display to the left.
+    Use the View->Mark and View->Zoom to look around.  Use
+    the Show->Planet Info command to get info on a particular 
+    planet.  Play around with the other commands as well.
+
+    ( Step 5. )
+      
+    Type 'Q' to exit.  
+
+Database Notes:
+
+    The database is stored in the files: 
+     
+      "save.planets" : list of known planets.
+      "save.ships" : list of ship descriptions and tech levels.
+      "save.groups" : list of groups.  
+      "save.routes" : list of routes extracted from turn report.
+      "save.version" : Holds map width, galaxy version and race name.
+      "save.msgs" : A copy of the messages that were printed during
+	your last session!  This file may be useful to you to look
+	at various test results you have printed.
+
+    You can print these files out because they are in a readable
+    ascii format.
+
+Known Bugs:
+
+    o The Goggle does not understand two column output, nor no under-
+      scores, in Russel version of galaxy (RWALLACE@vax1.tcd.ie).  You
+      must be run your turn reports with "NO TWOCOL" and "UNDERSCORES".
+
+Good Luck:
+
+    Any suggestions or comments may be mailed to me
+    at the e-mail address.
+

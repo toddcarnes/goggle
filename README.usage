@@ -1,0 +1,390 @@
+
+	   Welcome to
+
+      T H E     G O G G L E
+
+A Screen Oriented Galaxy Game Utility
+      Written by Douglas Selph
+
+Basics on Keys:
+
+  h - left	^H - scroll left
+  l - right	^L - scroll right
+  j - down	^J - scroll down
+  k - up	^K - scroll up
+
+  Tab - activate pulldown menus
+    Once in pulldowns use movements
+    keys to move to item of interest.
+  Return - activate selected item
+  Space - toggle the cursor between displays.
+  Esc - abort/cancel
+
+  There is the Map Display to the left (the LEFT lens) which shows 
+the planets and to the right of that is the File Display (the RIGHT 
+lens) whichs display information which has been requested.  There is
+a cursor position associated with each display (or lens).
+
+      ************
+      *** KEYS ***
+      ************
+
+  h, j, k, l - moves the cursor in the associated display left, down, 
+up, or right.   
+  H, J, K, L - jump the cursor to the edge of the display left, down,
+up, or right.  On the map display the cursor will stop mid-jump if
+passing over a planet.
+  ^H, ^J, ^K, ^L - scroll the display one half width/height of display
+left, down, up, or right.  
+
+  Tab - Activate menu bar.  Once the menu has been activated use the
+basic movement keys to move to the item of interest.  In dialogs, the
+Tab key is used to move to the next field.  
+  Return - Activate (execute) item of interest.  In dialogs, moves to
+the next field, or if on the 'Ok' line, executes the 'Ok' or
+'Cancel'.
+  Space - Toggle the cursor between displays.  Toggles the cursor
+between the Map Display and the File Display.  The main effect this
+has is to set which display cursor the movement keys affect.  In
+dialogs, the space bar toggles between the 'Ok' and 'Cancel' when the
+cursor is on that line.
+  Escape - The escape key may be used to abort out of the pulldown
+menus or any of the dialogs.
+  Backspace - Useful in the dialogs.  If on the first column of a
+field will move to the previous field.
+  Number [0-9] - Reset the file display to the associated file buffer.
+
+      ************************
+      *** GENERAL OVERVIEW ***
+      ************************
+
+      -- Your Database --
+
+	Your database consists of the following files:
+
+		save.planets
+		save.groups
+		save.ships
+		save.routes
+
+	It is always safe to remove these files (* see below). To 
+regenerate them you just re-execute the 'File->Read Turn' command 
+against your latest turn report.  These files are also good to 
+browse through.  You may also manually edit them for some special 
+purpose tasks you may have.  Note: for the first race in save.ships 
+you may use 'Test Ship Types' and place in this race a list of ships 
+you have not made but are planning on constructing.  For example, 
+you can add the following to the top of the save.ships file:
+
+	Arachnids Ship Types
+    Tech Level  3.39  4.45  4.63  1.00
+
+Name         Drive A  Weap  Sh     Cargo Mass   LY/full     AT     DA     Cost  
+Daddy_Long_LegA 7.5  0 0 0 7.5
+
+	Notice that only the first six fields are necessary (or even
+looked at by the parser).  To regenerate the save.ships file in a 
+nice format use the File->Save command.
+
+	* Note on removing save.* files:
+
+	All the save.* files may be removed safely with perhaps an
+exception with save.ships and save.version.  If you remove the save.version
+file, you will have to re-execute the Options->Customize command.  The
+save.ships is an actual accumulation of all the ship info gathered from
+all races read from all previous turn reports.  So if your latest turn 
+report does not have the ships type for race 'X', but a turn report you
+got 3 turns ago did have ships for race 'X', then removing save.ships
+and only reading in the latest turn report would lose information regarding
+the ships for race 'X'.  If this concerns you, you can read in all the
+turn reports again (in order please), and regenerate your data this way.
+
+      -- The File Buffers --
+
+      The right hand display shows the current file buffers.  You may
+have up to 10 file buffers, number from 0 to 9.  Typing the number of
+the file buffer brings up that file buffer to the screen.   The file
+buffer number is listed in the upper-right hand corner of the file
+display.  Also listed is an 'R' or 'E' indicating if the file buffer
+is read-only or editable.
+
+      To move to the next file buffer type 'n' (the accelerator for
+the Show->Next File Buffer comamnd).  To move to a previous file
+buffer type 'p' (Show->Previous File Buffer).
+
+      -- Map Display --
+
+      The left hand display shows the galaxy map.  By default the map
+comes up showing the full width of the galaxy.  Use the Options->Customize 
+command to set the galaxy width.  Commands to reset what the map shows
+are: View->Zoom, View->Center Around Planet, and View->Center Around
+Cursor.
+
+      *************************
+      *** COMMANDS OVERVIEW ***
+      *************************
+
+      -------------------
+      == File Commands ==
+      -------------------
+
+      	-- File->Read Turn --
+
+	This command is used to read in a turn report gotten from your 
+galaxy game.  When you get a new turn, use this command to update your 
+database.  You almost always want 'Save to Database' to be TRUE.  The 
+only time you might not want this is if you want to read in some sort
+of 'test' turn without actually messing up your database.  
+
+      	-- File->Open File --
+
+	Allows you to open up any file for reading or writing.  If you
+specify the file as 'editable' then the edit commands will be available
+against the corresponding file buffer.  The upper-right hand corner of
+the file buffer indicates 'E' for 'editable' and 'R' for read-only.
+
+ 	This command was originally intended to allow you to edit a set
+of turn orders while your goggle session is running.  However, I was
+not entirely satisfied on the way this worked out; it just seemed easier
+to me to write down the orders on a separate piece of paper.  However, I 
+have kept ability to edit a file around never-the-less.
+
+	-- File->Save Data --
+
+	Resaves your database files save.planets, save.ships, save.groups.
+The main reason for this command is that if you added some test ship
+types to save.ships (see above), you can reformat the save.ships file
+using this command.
+
+	-- File->Save Map --
+
+	Saves the currently displayed map to a file so that you can print it
+out.
+
+      -------------------
+      == View Commands ==
+      -------------------
+
+      	-- View->Place Mark --
+
+	This command sets the mark, which appears as an 'X' on the map
+display.  The mark is necessary to execute the View->Zoom command.  It
+is also used with the View->Distance Between Two Planets command.
+
+	-- View->Zoom --
+
+	Used to zoom in on the marked region.  A mark must have been
+set using the Edit->Mark command before this command will work.  The
+zoomed in region is defined by mark being one corner and the current
+cursor position begin the other corner.
+
+	-- View->Unzoom And The Zoom Layers --
+
+	Unzoom one layer.  Your zoom's are remembered to up to 3
+layers.  The zoom layers are even remembered session to session, so
+that when you re-invoke the goggle, the last zoom set will be your
+starting zoom layer.  The zooms are saved to the file 'save.zooms'.
+It is harmless to remove this file.
+
+      -------------------
+      == Show Commands ==
+      -------------------
+
+	-- Planet Info --
+
+	Displays the planet stats, route information, and groups 
+orbiting the planet.  The planet is specified by cursor position when
+the command is invoked.  You must move the cursor so that it is over a
+planet before invoking the command.  If there is more than one planet
+at the current cursor location, you will be prompted for the planet to
+display.
+
+	Note on UPGRADE field: displays how much it would cost to
+upgrade just one ship in the specified group.
+
+	-- Groups And Battle Groups --
+      
+	Shows all group information for the prompted race.  
+
+	Special Note On Battle Groups:
+	If the group number is '-1' then you will also notice that 
+displayed in the 'Dist' field for the planet is the word 'Battle'.  This 
+group was read in from the "Battle at" section for that planet.  The number
+of ships displayed is the number of ships left after the battle has
+taken place.   Note that your groups will never be shown as battle groups
+because your groups are always listed in the turn report.
+	
+	-- Ships --
+
+	The ships of the prompted race are listed.   You are also
+prompted for the tech level to use for the generated stats for each
+ship line.  Goggle by default trys to use the most recent techs that it
+knows about for that race.
+
+	-- Messages --
+
+	All messages displayed are saved to a file.  This command
+shows you that file.  This is especially useful in conjunction with
+the 'Calc' commands to review previous test ships or stats that you
+have computed.  The name of the save file is 'save.msgs'.  This file 
+is not removed after exit so that you may look at it if desired.
+
+	-- Next Display File --
+	-- Previous Display File --
+
+	You are able to peruse the file buffers using these two commands.  
+
+	-- Delete Display File --
+
+	There are ten file buffers.  When all the file buffers are
+filled and a new one is needed the next in-line buffer will be taken.
+If you know that a particular file buffer is no longer wanted, you may
+delete it using this command.
+
+      -------------------
+      == Calc Commands ==
+      -------------------
+
+	-- Distance Between Two Planets --
+
+	Calculate the distance between two planets.  The prompt uses
+the mark position and the current cursor position to determine what
+planets it uses as defaults.
+
+	-- Test Ship --
+
+	This enormous dialog allows you to design a new ship.  As
+soon as you enter in all values and move to the 'Ok' line, a message
+will display the stats for the test ship.  For example,
+
+Drive: 1.0 #Attack: 1 Weapon: 1.0 Shield 1.0 Cargo: 0.0
+Mass: 3.00 Ly: 6.67 Defense: 2.2 Eff Cargo: 0.0 Cost: 30.0
+
+	You will only be able to see the second displayed line.  This 
+is the line which you are really interested in.  The first line is shown 
+so that if you later review the messages using the command 'Show->Messages'
+or viewing the 'save.msgs' file, you will see the stats in context.
+
+	The default techs used for the test ship dialog are gotten
+from your race entry listed in save.ships.  By convention the first race 
+in save.ships is 'Test Ship Types' and the second is your 'Ship Types', 
+and all the rest are other races.  If you manually edit the save.ships line, 
+note that only the first 6 fields are looked at when the Goggle starts up.  
+The rest of the fields are generated and may be left blank.
+
+	-- Drive Stat --
+
+	Compute what drive stat is needed to move a particular speed.
+The computed value is remembered and placed in the Test Ship dialog
+automatically.
+
+	-- Shield Stat --
+
+	Compute what shield stat is needed to provide a particular 
+defense.  The computed value is remembered and placed in the Test 
+Ship dialog automatically.
+
+	-- Production --
+
+	Able to compute the amount of production of a particular
+type for the planet specified.  If the cursor is over a planet when
+this command is issued, the prompt for the planet will be filled
+in with that name for your convinience.
+	The following estimates are available:
+
+	Number Of Ships Of A Particular Size
+	   Estimates the # of ships of a particular mass the
+	   planet may produce.  I have found this to be accurate
+	   for >= 3.0 galaxy games, but for < 3.0 it is off for 
+	   planets with resources less than one.
+	Capital
+	Raw Materials
+	Drive Tech
+	Weapon Tech
+	Shield Tech
+	   These values are slightly high if your version is < 3.0.
+	Cargo Tech   
+	   Takes into account galaxy version (if >= 3.0 then 2000/pt).
+
+      ---------------------
+      == Battle Commands ==
+      ---------------------
+
+      The battle simulator allows you to simulate any galaxy 3.4 battle.
+The process of setting up a battle is:
+
+	(1) Battle Use: added groups to active battle.
+	(2) Battle Display: display groups added to active battle.
+	(3) Battle Run: run the simulation N times.
+	(4) Battle Save: save battle data/results.
+	(5) Battle Clear: clear battle data to prepare for next battle.
+
+	You may also read in saved battle results files in the current
+battle in order to re-run them again.
+
+      -- Battle Use --
+
+      The cursor should either be over a planet or over a displayed group line.
+When this command is executed and the cursor is over a planet all groups at
+that planet are added.   If the cursor was on a group line, those groups
+are added.
+	
+      -- Battle Display --
+
+      Display the data/results of the current battle.  The current groups
+in the battle and the battle results are the same thing.  The 'Av' field
+show zero if no battles have been done yet.  
+
+      -- Battle Run --
+
+      Run one or more consecutive battles.  The average number of ships
+destroyed is showed as part of the battle results.
+
+      -- Battle Save --
+
+      Save the battle results to a file.  You modify this file freely
+to add groups, remove groups, or modify existing groups.  After modification
+you may read the results back in (Battle Read) and then run the simulation.
+
+      -- Battle Clear --
+
+      Clear all battle data.
+
+      -- Battle Read --
+
+      Read in the battle data from a file.  The internal battle data is
+cleared before reading in the data.
+
+      ---------------------
+      == Option Commands ==
+      ---------------------
+
+	-- Customize --
+
+	If the galaxy version is less than 3 then the following operations
+are done differently than version 3.0 of the Galaxy Game By Russell:
+
+	o Upgrade Cost is not printed in group lines.
+	o Mass of ships are computed differently.   That is the weapon mass is
+computed by the simple formula attacks*size instead of taking half mass for
+weapons beyond #attacks > 1.
+	o Cargo ships are not able to carry as much.
+	o Industry needed per point of tech is 5000.
+
+	-- Toggle Group Stat/Tech --
+
+	Toggles whether to print the stats for group lines or just the tech
+values.  For example, when printing groups normally this is what appears,
+
+G# # Type            Planet  Dist   LY        ATK  DEF  QUAN       UPGRD
+1  2 Daddy_Long_LegA Pebbles 0.00  (12.00/6.5,0.00,0.00,9.00/9.00) 340.0
+
+	However, instead of printing the stats one could instead just the
+tech values for the groups:
+
+G# # Type            Planet  Dist   DRIV  WEAP SHLD CARGO 
+1  2 Daddy_Long_LegA Pebbles 0.00   [1.00,0.00,0.00,1.00]
+
+	Commands which are affected by this command are commands which print
+out group lines.  They are: Show->Groups, Show->Planet Info.
+

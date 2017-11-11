@@ -1,0 +1,222 @@
+Goggle is now maintained by Robin Powell, as of v2.6
+$Id: README.changes,v 1.5 1997/12/14 15:13:23 rlpowell Exp rlpowell $
+
+New in version 2.8.1
+--------------------
+
+o Merged in code from Vincent Archer (again, wow) to deal with the cursor
+    being thrown out of wack by the new screen size change code, a bug which I
+    was aware of but didn't have the inclination to track down.
+
+o Also fixed a bug such that groups didn't get read in if every planet was
+    occupied.  Report (and fix) sent by Graeme Griffiths
+    <graeme@postimpressions.co.uk>.  Note that I have not test cases for this,
+    so I haven't.  Let me know if it doesn't work.
+
+New in version 2.8
+------------------
+
+o The 'ungetch' was #if-#endif replaced with another way to force redraw
+    sent in by Vincent Archer <Vincent.Archer@hsc.fr>.  The reason for this
+    is that ungetch is undefined in BSD curses, and aparently a _lot_
+    more things that goggle uses are undefined in other curses.
+    See platform.h for more details.
+
+o You can now use the Customize menu option to tell Goggle to start up in
+    something other than all file mode.  See README.setup for more details.
+
+New in version 2.7
+------------------
+
+o Cosmetic Changes:
+    - ANSI code from Laurent Desnogues <desnogue@aiguemarine.unice.fr> was
+	merged in with a lot of blood, sweat and tears (I had to preserve my
+	changes, as his stuff was done on 2.5, so I had to make diffs for all
+	files and go through them by had and use the results as patches).
+	Shudder.  It's done, though, so I'm happy.
+    - Set up vim's cindent in a format I like (which is the defaults with
+	smarttab on and shiftwidth 4) and ran '=G' from the top of every file.
+	Formatting is very pretty now.  Also put '{'s on independent lines
+	in the few cases (structs) where they weren't already.
+    - Upped MAX_SHIP_LEN to a power of 2 (32).
+    - Note that there are a lot more .h's noew due to Laurent's ANSI stuff.
+
+o Removed the Edit menu, which was basically useless as the file editing stuff
+    wasn't even being distributed (never was finished), and the mark command
+    belonged more properly in the View menu (which is where the only commands
+    that use it live) anyways.
+
+o Merged in Anders <frv95alk@mds.mdh.se>'s ship 'safe' number.  The point
+    behind this is that (according to Ander, I have no idea), the ship defense
+    number has no real meaning (much like the US's national debt), and his
+    'safe' number (which is the maxmimum gun hit the ship can withstand)
+    is more useful.  Sounds reasonable to me.
+
+o Turned 'delete display file' into 'remove display file' with shortcut 'rd'.
+    The previous shortcut didn't work, as 'd' was taken, so the second d
+    never got through.
+
+
+New in version 2.6
+------------------
+
+o Major changes to window handling
+    - The three column modes are now all file, half-and-half, and all map
+    - Now the 0/1/2 columns thing makes more sense (think of it as the number
+        of columns that the map window takes up)
+    - Stars in all file mode for newbies
+    - Hitting space in all file or all map switches between the two!!
+    - Hitting 'i' in all map switches to all file with the info displayed
+o The map window now uses the whole height available to it!
+    - Note that this may result in visual distance distortion, since most
+        people's screens or xterms are not square.  Cope.  Use distance
+        calculator to be sure.
+o The menu bar is now refreshed (it wasn't being shown at all on my machine,
+    I only knew it existed when I looked at the source)
+
+New in version 2.5 that 2.4 did not have:
+-----------------------------------------
+
+o Small fixes making the goggle more portable.
+
+New in version 2.4 that 2.2 did not have:
+-----------------------------------------
+
+o Slight modification to platform.h
+
+o The upgrade formula was incorrectly implemented.  Formula
+  computation corrected to be:
+
+      upgrade_cost = 10 *
+        (((1 - tdrive / rdrive) * drive) +
+         ((1 - tweapon / rweapon) * weapon_mass(attacks, weapon)) +
+         ((1 - tshield / rshield) * shield) +
+         ((1 - tcargo / rcargo) * cargo));
+
+New in version 2.3 that 2.2 did not have:
+-----------------------------------------
+
+o Able to deal with Fleet entries of 3.5 galaxy
+o Upgrade field for groups now shows percentage saving
+  to upgrade ship as opposed to building it afresh.
+o Fixed bug in readdata.c where if two groups are identical
+  in every way (name, techs, same planet, etc.) except the
+  group number only the first group would be registered.  Oops.
+o Added the ablility to print out list of ships('s') and simulated
+  list of groups('g') in the battle program.
+o Added "Results" entry in battle report which lists total number
+  of ships left for all groups for each race for the entire battle.
+o Now able to read in battle results file as input to the battle
+  program.  
+
+New in version 2.2 that 2.1 did not have:
+-----------------------------------------
+
+o Call to cbrt in calc.c should have been CBRT.
+
+New in version 2.1 that 2.0 did not have:
+-----------------------------------------
+
+o Ctrl-Z no longer core dumps program.
+
+New in version 2.0 that 1.7 did not have:
+-----------------------------------------
+
+o Added Battle Simulator to goggle!  Also created
+  a simple prompt-line driven program called 'battle'
+  which interfaces into the same code.
+
+o Got rid of edit file capability.  I never used
+  this, it was buggy, it added complexity and size
+  to the code, so I decided to get rid of it.  If
+  you really want to edit a file while the goggle
+  is up and you don't have another window to do it,
+  then suspend the goggle (Ctrl-Z) and start up 
+  your favorite editor.  This is just not that bad.
+  Tell me if you really missed being able to edit 
+  files.
+
+o Corrected num_ships listed in group-listing for
+  groups known from a battle listing.  Listed
+  the before-the-battle-took-place number of ships,
+  instead of after-the-battle-took-place # of ships.
+
+o When error reading in turn, message does not just
+  say 'Finished reading in turn'.
+
+o The planet locator has been modified not to be
+  so picky.  Therefore the command Distance Between Planets
+  will pick up the planet that has been 'marked' more
+  often now, before it would lose it due to rounding
+  problems.
+
+o In group listings, carriers include speed/defense 
+  based on amount of load carrier is carrying.   
+
+o Fixed bug which did not redisplay correctly when entering
+  in a bad value in a prompt window, or a select-prompt window.
+  Also, fixed the "NULL" message which occurs if compiling under
+  -DNDEBUG for 'Ok' messages.
+
+New in version 1.7 that 1.6 did not have:
+-----------------------------------------
+
+o Ship Descriptions and Groups now use the heap
+  instead of the data segment.  Effect?  No
+  need to set max number of groups or ships
+  in platform.h.  Will be able to accomodate
+  as many ships and groups as there is memory
+  on the machine.
+
+New in version 1.6 that 1.5 did not have:
+-----------------------------------------
+
+o Successful port to Silicon Graphics station.
+o Moved constants that control the data segment
+  size needed in data.h and group.c into platform.h
+  so that ports to the IBM machine may be done 
+  more conviniently (or at all).
+o Fixed bug in Calc->Distance Between Two Planets 
+  message.
+o Fixed a bug for prompt dialog that appears when
+  more than one planet is at a single cursor location.
+o Fixed bug specific to the DEC station only.
+
+New in version 1.5 that 1.4 did not have:
+-----------------------------------------
+
+o Modified README files.
+o For the commands 
+     Show->Groups and 
+     Show->Distance From All Planets
+  if there is more than one planet underneath
+  the cursor, a prompt dialog allows you select
+  which one you mean.
+o Removed debug prints to bug.out.
+o Fixed bug regarding command "Help->Code".
+
+New in version 1.4 that 1.3 did not have:
+-----------------------------------------
+
+o platform.h now handles the hp port (I hope).
+o README files updated.
+o bug fixed when too many races in save.ships.
+o If called up with argument '-' will read in
+  a turn report from stdin.
+o Function to estimate number of ships a planet
+  may produce readded by popular demand.  
+  New: also can estimate amount of production
+  for cap, mat, drive, shield, weapon, or cargo.
+  Command: "Calc->Production".
+
+New in version 1.3 that 1.2 did not have:
+-----------------------------------------
+
+o The command "File->Save Map".  Saves currently displayed
+  map to file.
+
+New in version 1.3 that 1.2 did not have:
+-----------------------------------------
+
+o Fixed bug in screen.c where an 40 lines X 80 cols terminal 
+  causes segmentation fault.
